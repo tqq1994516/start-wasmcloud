@@ -1,0 +1,3 @@
+[placeholders.component_outdir]
+prompt = "Where to output your WASI component"
+default = "target/server"
