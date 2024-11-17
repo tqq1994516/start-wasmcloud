@@ -56,12 +56,11 @@ Well, by nature, WebAssembly give you the freedom to chose the runtime you want.
 For now, we have only tested running the commponents with [Wasmtime](https://wasmtime.dev):
 
 ```
-wasmtime serve {{component_outdir}}/wasm32-wasip2/debug/{{crate_name}}.wasm
+wasmtime serve {{component_outdir}}/wasm32-wasip2/debug/{{crate_name}}.wasm -Scli
 ```
 
 Be sure to add the flags you need to provide the worlds your component depends on:
 
-* `-Scli` for the CLI world,
 * `--dir target/site/pkg` if you want, for example, to use `wasi:filesystem` to serve
   the static assets,
 * `--env` if you want to pass environment variables,
