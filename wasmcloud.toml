@@ -1,0 +1,8 @@
+name = "{{crate_name}}"
+language = "rust"
+type = "component"
+
+[component]
+wasm_target = "wasm32-wasip2"
+build_command = "cargo make build"
+# build_command = "cargo make build-prod"  # prod build

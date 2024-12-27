@@ -7,14 +7,17 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-console_error_panic_hook = "0.1.7"
-wasi = { version = "0.13.3", optional = true }
-hydration_context = { git = "https://github.com/leptos-rs/leptos" }
-leptos = { git = "https://github.com/leptos-rs/leptos" }
-leptos_meta = { git = "https://github.com/leptos-rs/leptos" }
-leptos_router = { git = "https://github.com/leptos-rs/leptos" }
-leptos_wasi = { git = "https://github.com/leptos-rs/leptos_wasi", optional = true }
-wasm-bindgen = { version = "0.2.95", optional = true }
+console_error_panic_hook = "0.1"
+bytes = "1.9"
+futures = "0.3"
+hydration_context = "0.2"
+wasi = { version = "0.13", optional = true }
+leptos = { verison = "0.7" }
+leptos_meta = { verison = "0.7" }
+leptos_router = { verison = "0.7" }
+leptos_wasi = { version = "0.1", optional = true }
+wasm-bindgen = { version = "0.2.99", optional = true }
+wit-bindgen = { version = "0.36", optional = true }
 
 [features]
 # This is your client-side feature.
@@ -30,6 +33,7 @@ ssr = [
   "leptos_router/ssr",
   "dep:leptos_wasi",
   "dep:wasi",
+  "dep:wit-bindgen",
 ]
 
 # Defines a size-optimized profile for the WASM bundle in release mode.
