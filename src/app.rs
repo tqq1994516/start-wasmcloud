@@ -31,7 +31,7 @@ pub fn App() -> impl IntoView {
 
     view! {
         // injects a stylesheet into the document <head>
-        <Stylesheet id="leptos" href="/pkg/{{crate_name}}.css"/>
+        <Stylesheet id="leptos" href="/pkg/{{project-name}}.css"/>
 
         // sets the document title
         <Title text="Welcome to Leptos"/>

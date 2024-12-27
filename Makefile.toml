@@ -12,11 +12,11 @@ args = ["wit", "deps"]
 
 [tasks.wash-claims]
 command = "wash"
-args = ["claims", "sign", "./target/server/wasm32-wasip2/debug/{{crate_name}}.wasm", "--destination", "./build/{{crate_name}}_s.wasm"]
+args = ["claims", "sign", "./target/server/wasm32-wasip2/debug/{{project-name}}.wasm", "--destination", "./build/{{project-name}}_s.wasm"]
 
 [tasks.wash-claims-prod]
 command = "wash"
-args = ["claims", "sign", "./target/server/wasm32-wasip2/wasm-release/{{crate_name}}.wasm", "--destination", "./build/{{crate_name}}_s.wasm"]
+args = ["claims", "sign", "./target/server/wasm32-wasip2/wasm-release/{{project-name}}.wasm", "--destination", "./build/{{project-name}}_s.wasm"]
 
 [tasks.build]
 dependencies = [

@@ -1,4 +1,4 @@
-name = "{{crate_name}}"
+name = "{{project-name}}"
 language = "rust"
 type = "component"
 

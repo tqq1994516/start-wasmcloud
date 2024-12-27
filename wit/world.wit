@@ -1,4 +1,4 @@
-package {{crate_name}}:entry;
+package {{project-name}}:entry;
 
 world entry {
   import wasi:logging/logging@0.1.0-draft;

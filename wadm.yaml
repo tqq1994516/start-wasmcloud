@@ -2,18 +2,18 @@
 apiVersion: core.oam.dev/v1beta1
 kind: Application
 metadata:
-  name: {{crate_name}}
+  name: {{project-name}}
   annotations:
     version: v0.0.1
     description: 'A starter template for a wasmCloud SSR server with Leptos'
 spec:
   components:
     # Component that serves the blobstore-over-HTTP abstraction
-    - name: {{crate_name}}
+    - name: {{project-name}}
       type: component
       properties:
         # To use the locally compiled code in this folder, use the line below instead after running `wash build`:
-        image: file://./build/{{crate_name}}_s.wasm
+        image: file://./build/{{project-name}}_s.wasm
         # image: ghcr.io/wasmcloud/components/http-blobstore-rust:0.2.0
       traits:
         # Govern the spread/scheduling of the component
@@ -60,7 +60,7 @@ spec:
         # the component to handle an incoming HTTP request.
         - type: link
           properties:
-            target: {{crate_name}}
+            target: {{project-name}}
             namespace: wasi
             package: http
             interfaces: [incoming-handler]
