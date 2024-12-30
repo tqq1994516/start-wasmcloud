@@ -1,33 +1,21 @@
-[tasks.leptos-build]
-command = "cargo"
-args = ["leptos", "build"]
-
-[tasks.leptos-build-prod]
-command = "cargo"
-args = ["leptos", "build", "--release"]
-
 [tasks.wit-deps-fetch]
 command = "wash"
 args = ["wit", "deps"]
 
-[tasks.wash-claims]
-command = "wash"
-args = ["claims", "sign", "./target/server/wasm32-wasip2/debug/{{project-name}}.wasm", "--destination", "./build/{{project-name}}_s.wasm"]
-
-[tasks.wash-claims-prod]
-command = "wash"
-args = ["claims", "sign", "./target/server/wasm32-wasip2/wasm-release/{{project-name}}.wasm", "--destination", "./build/{{project-name}}_s.wasm"]
-
 [tasks.build]
-dependencies = [
-    "wit-deps-fetch",
-    "leptos-build",
-    "wash-claims"
-]
+command = "cargo"
+args = ["leptos", "build"]
+dependencies = ["wit-deps-fetch"]
 
 [tasks.build-prod]
-dependencies = [
-    "wit-deps-fetch",
-    "leptos-build-prod",
-    "wash-claims-prod"
-]
+command = "cargo"
+args = ["leptos", "build", "--release"]
+dependencies = ["wit-deps-fetch"]
+
+[tasks.wash-build]
+command = "wash"
+args = ["claims", "sign", "./{{component_outdir}}/wasm32-wasip2/debug/{{project-name}}.wasm", "-d", "./{{component_outdir}}/wasm32-wasip2/debug/{{project-name}}_s.wasm"]
+
+[tasks.wash-build-prod]
+command = "wash"
+args = ["claims", "sign", "./{{component_outdir}}/wasm32-wasip2/wasm-release/{{project-name}}.wasm", "-d", "./{{component_outdir}}/wasm32-wasip2/wasm-release/{{project-name}}_s.wasm"]

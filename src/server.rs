@@ -1,7 +1,7 @@
 use std::task::Poll;
 use bytes::Bytes;
 use futures::stream;
-use leptos::{config::get_configuration, task::Executor};
+use leptos::{config::get_configuration, error::Error, task::Executor};
 use leptos_wasi::prelude::{Body, WasiExecutor};
 use wasi::{exports::http::incoming_handler::Guest, http::{proxy::export, types::{IncomingRequest, ResponseOutparam}}};
 

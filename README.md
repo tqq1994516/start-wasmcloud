@@ -14,56 +14,71 @@ using [leptos_wasi](https://github.com/leptos-rs/leptos_wasi).
 ```bash
 cargo install cargo-leptos --locked
 cargo install cargo-generate
+cargo install cargo-make
 ```
 
 ## Init a new project
 
 ```bash
-cargo leptos new --git https://github.com/leptos-rs/start-wasi
+cargo leptos new --git https://github.com/tqq1994516/start-wasmcloud
 ```
-
-### How to serve static files?
-
-You **MUST** write the `serve_static_files` function in
-[`src/server.rs`](src/server.rs).
-
-We make no assumptions about which world is available for your component.
-It is not guaranteed that you will give filesystem access to your component.
-That's why you need to explicitly write the logic to serve static files.
-
-If you do want to use `wasi:filesystem`, then you can check the link
-in the comments of the said function. In the future, we may add default
-implementation in `leptos_wasi` to ease your life.
 
 ## Compiling your project
 
 ### For release
 
+Modify the `wasmcloud.toml` file, uncomment the line containing the comment `prod build` and comment out the line containing the comment `dev build`.
+
 ```bash
-cargo leptos build --release
+wash build
 ```
 
 ### For development
 
+Modify the `wasmcloud.toml` file, uncomment the line containing the comment `dev build` and comment out the line containing the comment `prod build`.
+
 ```bash
-cargo leptos build
+wash build
 ```
 
 ### How to run the component?
 
-Well, by nature, WebAssembly give you the freedom to chose the runtime you want.
+This template can quickly run `leptos-wasi` as an application in the `wasmCloud` environment.
 
-For now, we have only tested running the commponents with [Wasmtime](https://wasmtime.dev):
+In order to enable the correct access to the front-end static resources, it's necessary to replace the value of `${PWD}` on line 38 in the `wadm.yaml` with the actual present working directory (pwd) value of the current project before running. Currently, I haven't found a good way to replace this value when generating the template. So, at this stage, it needs to be modified manually. For example: xxx.:
 
+The directory of my project is located at `/root/demo`, so my wadm.yaml needs to be modified like this.
+
+```yaml
+        - type: link
+          properties:
+            target: blobstore-fs
+            namespace: wasi
+            package: blobstore
+            interfaces: [blobstore]
+            target_config:
+              - name: root-directory
+                properties:
+                  root: '/root/demo/target/site'
 ```
-wasmtime serve {{component_outdir}}/wasm32-wasip2/debug/{{crate_name}}.wasm -Scli
+
+#### Run application
+
+```bash
+wash app deploy ./wadm.yaml
 ```
 
-Be sure to add the flags you need to provide the worlds your component depends on:
+#### Check the status of the app
 
-* `--dir target/site/pkg` if you want, for example, to use `wasi:filesystem` to serve
-  the static assets,
-* `--env` if you want to pass environment variables,
+```bash
+wash app status {{project-name}}
+```
+
+#### Delete application
+
+```bash
+wash app deploy {{project-name}}
+```
 
 ## Licensing
 

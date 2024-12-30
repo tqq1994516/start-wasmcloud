@@ -1,6 +1,6 @@
-package {{project-name}}:entry;
+package {{project-name}}:leptos;
 
-world entry {
+world leptos {
   import wasi:logging/logging@0.1.0-draft;
   import wasi:blobstore/blobstore@0.2.0-draft;
 }

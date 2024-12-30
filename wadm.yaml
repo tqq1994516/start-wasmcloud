@@ -13,7 +13,8 @@ spec:
       type: component
       properties:
         # To use the locally compiled code in this folder, use the line below instead after running `wash build`:
-        image: file://./build/{{project-name}}_s.wasm
+        image: file://./{{component_outdir}}/wasm32-wasip2/debug/{{project-name}}_s.wasm
+        # image: file://./{{component_outdir}}/wasm32-wasip2/release-wasm/{{project-name}}_s.wasm  # prod build
         # image: ghcr.io/wasmcloud/components/http-blobstore-rust:0.2.0
       traits:
         # Govern the spread/scheduling of the component
@@ -34,7 +35,7 @@ spec:
             target_config:
               - name: root-directory
                 properties:
-                  root: 'target/site'
+                  root: '${PWD}/target/site'
 
     # Capability provider that serves HTTP requests
     - name: httpserver
